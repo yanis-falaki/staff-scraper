@@ -1,5 +1,7 @@
+from os import system
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 import csv
 from bs4 import BeautifulSoup
 
@@ -54,8 +56,10 @@ with open('data/dawson.csv', 'w', newline='') as csvfile:
 
 # Instantiate driver
 chrome_options = Options()
+chrome_options.binary_location = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 chrome_options.add_experimental_option("detach", True)
-driver = webdriver.Chrome(options=chrome_options)
+service = Service(executable_path="/Users/yanisfalaki/Downloads/chromedriver-mac-arm64/chromedriver")
+driver = webdriver.Chrome(options=chrome_options, service=service)
 
 for link in links:
     department = link.split('/')[0]

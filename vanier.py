@@ -1,12 +1,15 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 import csv
 from bs4 import BeautifulSoup
 import string
 
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
-driver = webdriver.Chrome(options=chrome_options)
+chrome_options.binary_location = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+service = Service(executable_path="/Users/yanisfalaki/Downloads/chromedriver-mac-arm64/chromedriver")
+driver = webdriver.Chrome(options=chrome_options, service=service)
 
 for letter in string.ascii_uppercase:
     driver.get(f'https://www.vaniercollege.qc.ca/staff-directory/?index={letter}')
